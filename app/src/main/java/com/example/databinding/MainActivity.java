@@ -2,6 +2,7 @@ package com.example.databinding;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
+import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -23,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
         mainViewmodel = new ViewModelProvider(this).get(MainViewmodel.class);
         binding.setViewmodel(mainViewmodel);
+        binding.setLifecycleOwner(this);
         //binding.getViewmodel()(this);
 
 
@@ -48,12 +50,13 @@ public class MainActivity extends AppCompatActivity {
             }
         });*/
 
-        mainViewmodel.count.observe(this, new Observer<Integer>() {
+       /* mainViewmodel.count.observe(this, new Observer<Integer>() {
             @Override
             public void onChanged(Integer integer) {
-                binding.result.setText(String.valueOf(mainViewmodel.count.getValue()));
+                //binding.result.setText(String.valueOf(mainViewmodel.count.getValue()));
+                mainViewmodel.result.setValue(String.valueOf(mainViewmodel.count.getValue()));
             }
-        });
+        });*/
 
     }
 }
